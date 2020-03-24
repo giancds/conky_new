@@ -218,7 +218,9 @@ def get_time_info():
     cal = calendar.month(int(year), int(month))
     cal = cal.replace(' ', '&nbsp;&nbsp;')
     cal = cal.replace('\n', '<br/>')
-    cal = cal.replace(day, "<b><font style='font-size:11px; color: #51751E;'>{0}</font></b>".format(day))
+    cal = cal.replace(
+        day, "<b><font style='font-size:11px; color: #51751E;'>{0}</font></b>".
+        format(day))
     string += """
     <div class='row align-items-center'>
 
@@ -351,9 +353,10 @@ def get_network_info():
 
         </div>
 
-    """.format(ICON_UP, int(bytes_sent_new[0]), bytes_sent_new[1], bytes_sent_old[0],
-               bytes_sent_old[1], ICON_DOWN, int(bytes_recv_new[0]),
-               bytes_recv_new[1], bytes_recv_old[0], bytes_recv_old[1])
+    """.format(ICON_UP, int(bytes_sent_new[0]), bytes_sent_new[1],
+               bytes_sent_old[0], bytes_sent_old[1], ICON_DOWN,
+               int(bytes_recv_new[0]), bytes_recv_new[1], bytes_recv_old[0],
+               bytes_recv_old[1])
 
     string += """ <div class='row'> """
     for key in addrs:

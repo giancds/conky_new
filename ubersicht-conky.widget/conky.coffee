@@ -7,7 +7,7 @@ refreshFrequency: 500
 
 render: (output) -> """
 
-  <div id='main' class='container'>
+  <div id='main' class='container' style='width: 260px !important'>
   </div>
 """
 
