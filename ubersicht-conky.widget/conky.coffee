@@ -17,6 +17,7 @@ update: (output, domEl) ->
     return
   $(domEl).find('#main').html output
 
+
 style: """
   top 1px
   left 5px

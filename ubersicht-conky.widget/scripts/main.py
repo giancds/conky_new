@@ -4,6 +4,8 @@ import platform
 import os
 import sh
 import time
+import calendar
+import datetime
 
 import psutil
 
@@ -88,7 +90,7 @@ def get_cpu_load():
             </div>
 
             <div class='col-5 text-right'>
-                <div class="progress" style="height: 7px; background: #212526 !important; ">
+                <div class="progress" style="height: 4px; background: #212526 !important; ">
                     <div class="progress-bar" role="progressbar" style="width: {3}%; background: #51751E;" aria-valuenow="{4}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
@@ -123,11 +125,11 @@ def get_ram_load():
             <div class='col-1'>
             </div>
 
-            <div class='col-4 text-left'>
+            <div class='col-5 text-right'>
                 F:&nbsp;<b>{:.2f}GiB</b>
             </div>
 
-            <div class='col-6 text-right'>
+            <div class='col-5 text-right'>
                 U:&nbsp;<b>{:.2f}GiB</b>
             </div>
 
@@ -202,17 +204,27 @@ def get_processes_load():
 
 
 def get_time_info():
+    calendar.setfirstweekday(calendar.SUNDAY)
     now = datetime.datetime.now()
     string = """
     <div class='row font-weight-bold'>
         Date&nbsp;<font style='font-size:8px'>{0:.^82s}</font>
     </div>
     """.format(DOT)
+
+    now = datetime.datetime.today()
+    year = now.strftime("%Y")
+    month = now.strftime("%m")
+    day = now.strftime("%d")
+    cal = calendar.month(int(year), int(month))
+    cal = cal.replace(' ', '&nbsp;&nbsp;')
+    cal = cal.replace('\n', '<br/>')
+    cal = cal.replace(day, "<b><font style='font-size:14px'>{0}</font></b>".format(day))
     string += """
     <div class='row align-items-center'>
 
-        <div class='col-1 text-right '>
-            {1}
+        <div class='col-3 text-right '>
+
         </div>
 
         <div class='col-3 '>
@@ -226,8 +238,17 @@ def get_time_info():
 
     </div>
 
+    <div class='row'>
+        <div class='col-2'>
+            {1}
+        </div>
+        <div class='col'>
+            {2}
+        </div>
+    </div>
 
-  """.format(now, ICON_CAL)
+
+  """.format(now, ICON_CAL, cal)
     return string
 
 
@@ -301,16 +322,16 @@ def get_network_info():
         <div class='row pb-1'>
 
             <div class='col-1'>
-                {0}
+                {}
             </div>
 
             <div class='col-5 text-left'>
-                Up: <b>{1}</b>
+                Up: <b>{} {}</b>
             </div>
 
 
             <div class='col-5 text-right'>
-                Total: <b>{2}</b>
+                Total: <b>{:.1f} {}</b>
             </div>
 
         </div>
@@ -318,21 +339,22 @@ def get_network_info():
         <div class='row pb-1'>
 
             <div class='col-1'>
-                {3}
+                {}
             </div>
 
             <div class='col-5  text-left'>
-                Down: <b>{4}</b>
+                Down: <b>{} {}</b>
             </div>
 
             <div class='col-5 text-right'>
-                Total: <b>{5}</b>
+                Total: <b>{:.1f} {}</b>
             </div>
 
         </div>
 
-    """.format(ICON_UP, bytes_sent_new, bytes_sent_old,  ICON_DOWN,
-               bytes_recv_new, bytes_recv_old)
+    """.format(ICON_UP, int(bytes_sent_new[0]), bytes_sent_new[1], bytes_sent_old[0],
+               bytes_sent_old[1], ICON_DOWN, int(bytes_recv_new[0]),
+               bytes_recv_new[1], bytes_recv_old[0], bytes_recv_old[1])
 
     string += """ <div class='row'> """
     for key in addrs:
@@ -371,8 +393,8 @@ def bytes2human(n):
     for s in reversed(symbols):
         if n >= prefix[s]:
             value = float(n) / prefix[s]
-            return '{:d} {:s}'.format(int(value), s)
-    return '{:d} B'.format(int(n))
+            return value, s
+    return n, 'B'
 
 
 def get_info():

@@ -4,7 +4,6 @@ Largely inspired by [conky_colors](https://github.com/helmuthdu/conky_colors) fr
 
 ### TODO:
 * Import [boostrap](https://getbootstrap.com/) outside ```index.html``` file.
-* Add month's calendar below current date.
 
 
 ### Credits
