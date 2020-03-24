@@ -2,7 +2,7 @@ settings:
   history: false
 
 command: "python3 ubersicht-conky.widget/scripts/main.py"
-refreshFrequency: 200
+refreshFrequency: 500
 
 
 render: (output) -> """
@@ -19,9 +19,10 @@ update: (output, domEl) ->
 
 
 style: """
-  top 1px
-  left 5px
 
+  top 2px
+
+  color #212526
   font-size 10px
   font-family Helvetica
 

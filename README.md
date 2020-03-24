@@ -5,6 +5,13 @@ Largely inspired by [conky_colors](https://github.com/helmuthdu/conky_colors) fr
 ### TODO:
 * Import [boostrap](https://getbootstrap.com/) outside ```index.html``` file.
 
+### Python packages:
+
+There is the need to install python3 in your system to run this widget. The following python packages must be installed.
+
+* ```psutil```
+    * To install:  ```pip3 install psutil ```
 
 ### Credits
-<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>.</div>
+Icons made by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com/).
+

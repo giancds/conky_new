@@ -2,7 +2,6 @@
 import datetime
 import platform
 import os
-import sh
 import time
 import calendar
 import datetime
@@ -219,7 +218,7 @@ def get_time_info():
     cal = calendar.month(int(year), int(month))
     cal = cal.replace(' ', '&nbsp;&nbsp;')
     cal = cal.replace('\n', '<br/>')
-    cal = cal.replace(day, "<b><font style='font-size:14px'>{0}</font></b>".format(day))
+    cal = cal.replace(day, "<b><font style='font-size:11px; color: #51751E;'>{0}</font></b>".format(day))
     string += """
     <div class='row align-items-center'>
 
